@@ -1,4 +1,4 @@
 streamlit
 pandas
 openpyxl
-streamlit-sortable-list
+streamlit-sortables==0.2.0
