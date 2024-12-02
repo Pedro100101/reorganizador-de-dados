@@ -42,6 +42,12 @@ if uploaded_file:
     st.write("Pré-visualização dos dados:")
     st.dataframe(df)
 
+    # Identificar colunas excedentes
+    extra_columns = list(set(df.columns) - set(DEFAULT_COLUMNS))
+    if extra_columns:
+        st.warning("As seguintes colunas excedentes foram detectadas e serão adicionadas ao final:")
+        st.write(extra_columns)
+
     # Opção para selecionar a ordem das colunas
     st.subheader("Selecione a ordem das colunas:")
     selected_columns = st.multiselect(
@@ -59,16 +65,15 @@ if uploaded_file:
 
     # Reorganizar colunas ao clicar no botão "Salvar"
     if st.button("Salvar Arquivo"):
-        # Identificar colunas faltantes e excedentes
+        # Identificar colunas faltantes
         missing_columns = list(set(DEFAULT_COLUMNS) - set(df.columns))
-        extra_columns = list(set(df.columns) - set(DEFAULT_COLUMNS))
         
         # Adicionar colunas faltantes com valores NaN
         for col in missing_columns:
             df[col] = None
 
         # Reordenar colunas
-        reordered_columns = DEFAULT_COLUMNS + extra_columns
+        reordered_columns = selected_columns + extra_columns
         df = df[reordered_columns]
 
         # Salvar arquivo
@@ -76,6 +81,19 @@ if uploaded_file:
         base_name, ext = os.path.splitext(original_name)
         new_file_name = f"{base_name}_modified{ext}"
         df.to_excel(new_file_name, index=False, engine="openpyxl")
+
+        # Aplicar estilo às colunas excedentes
+        workbook = load_workbook(new_file_name)
+        worksheet = workbook.active
+
+        # Obter índices das colunas excedentes
+        start_col = len(selected_columns) + 1
+        for col_idx in range(start_col, start_col + len(extra_columns)):
+            for row_idx in range(2, worksheet.max_row + 1):  # Ignorar cabeçalho
+                worksheet.cell(row=row_idx, column=col_idx).font = Font(color="FF0000")  # Vermelho
+
+        # Salvar o arquivo novamente
+        workbook.save(new_file_name)
 
         st.success(f"Arquivo salvo como {new_file_name}.")
         st.write("Baixe o arquivo abaixo:")
