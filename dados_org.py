@@ -17,13 +17,25 @@ DEFAULT_COLUMNS = [
 
 st.title("Reorganizador de Colunas para Dados Geoquímicos")
 
-# Adicionar assinatura no rodapé
-st.markdown("---")
+# Instruções de uso
 st.markdown(
     """
-    **Desenvolvido por [Pedro Armond](https://www.researchgate.net/profile/Pedro-Armond)**  
-    📧 E-mail: [pedro.armond@aluno.ufop.edu.br](mailto:pedro.armond@aluno.ufop.edu.br)  
-    🌐 ResearchGate: [https://www.researchgate.net/profile/Pedro-Armond](https://www.researchgate.net/profile/Pedro-Armond)
+    ### Instruções de Uso:
+    1. **Carregue um arquivo Excel (.xlsx):** Utilize a funcionalidade de upload para carregar o arquivo contendo seus dados geoquímicos.
+    2. **Selecione a aba desejada:** Caso seu arquivo contenha várias abas, você poderá selecionar a aba que deseja reorganizar.
+    3. **Visualize as colunas excedentes:** O algoritmo identificará colunas com labels que não correspondem ao padrão e as mostrará na tela. Essas colunas serão adicionadas ao final da planilha processada.
+    4. **Organize as colunas existentes:** Utilize a funcionalidade de drag-and-drop para reorganizar as colunas definidas pelo padrão:
+        ```
+        "Sample", "Pluton", "Group", "Rock_type", "Observation", "Tectonic_setting", "Location_notes",
+        "Age", "Reference", "Colour", "Symbol", "Size", "SiO2", "TiO2", "Al2O3", "FeO", "FeOt", 
+        "Fe2O3", "Fe2O3t", "MnO", "MgO", "CaO", "K2O", "Na2O", "P2O5", "Total", "H2Ot", "LOI",
+        "Li", "Be", "B", "Sc", "V", "Cr", "Ni", "Cu", "Zn", "Rb", "Sr", "Y", "Zr", "Nb", "Cs", 
+        "Ba", "La", "Ce", "Pr", "Nd", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", 
+        "Lu", "Hf", "Ta", "Pb", "Th", "U", "Co", "Mo", "W", "Ga", "Ge", "As", "In", "Sn", 
+        "Sb", "Cd"
+        ```
+    5. **Colunas ausentes:** Caso sua planilha não contenha algumas dessas colunas, o algoritmo criará essas colunas automaticamente e preencherá os valores com `NaN`. Você poderá excluí-las após o processamento, se desejar.
+    6. **Baixe o arquivo reorganizado:** O algoritmo salvará um novo arquivo Excel, preservando o original, e o disponibilizará para download.
     """
 )
 
