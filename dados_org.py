@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os
+from openpyxl import load_workbook
+from openpyxl.styles import Font
 
 # Definir as colunas padrão
 DEFAULT_COLUMNS = [
@@ -29,8 +31,14 @@ st.markdown(
 uploaded_file = st.file_uploader("Carregue sua planilha (.xlsx)", type=["xlsx"])
 
 if uploaded_file:
-    # Leitura do arquivo
-    df = pd.read_excel(uploaded_file)
+    # Exibir as abas disponíveis no arquivo Excel
+    workbook = pd.ExcelFile(uploaded_file)
+    sheet_names = workbook.sheet_names
+    st.write("A planilha contém as seguintes abas:")
+    selected_sheet = st.selectbox("Selecione a aba que contém os dados:", sheet_names)
+
+    # Leitura da aba selecionada
+    df = pd.read_excel(uploaded_file, sheet_name=selected_sheet)
     st.write("Pré-visualização dos dados:")
     st.dataframe(df)
 
@@ -52,15 +60,15 @@ if uploaded_file:
     # Reorganizar colunas ao clicar no botão "Salvar"
     if st.button("Salvar Arquivo"):
         # Identificar colunas faltantes e excedentes
-        missing_columns = list(set(selected_columns) - set(df.columns))
-        extra_columns = list(set(df.columns) - set(selected_columns))
+        missing_columns = list(set(DEFAULT_COLUMNS) - set(df.columns))
+        extra_columns = list(set(df.columns) - set(DEFAULT_COLUMNS))
         
         # Adicionar colunas faltantes com valores NaN
         for col in missing_columns:
             df[col] = None
 
         # Reordenar colunas
-        reordered_columns = selected_columns + extra_columns
+        reordered_columns = DEFAULT_COLUMNS + extra_columns
         df = df[reordered_columns]
 
         # Salvar arquivo
