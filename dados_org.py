@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from openpyxl import load_workbook
 from openpyxl.styles import Font
-from streamlit_sortable import sortable_list  # Biblioteca para drag-and-drop
+from streamlit_sortables import sort_items  # Biblioteca para drag-and-drop
 
 # Definir as colunas padrão
 DEFAULT_COLUMNS = [
@@ -50,8 +50,9 @@ if uploaded_file:
 
     # Reordenação com Drag-and-Drop
     st.subheader("Reorganize as colunas desejadas:")
-    selected_columns = sortable_list(
+    selected_columns = sort_items(
         items=DEFAULT_COLUMNS,
+        key="sortable_columns",
         direction="horizontal",
         label="Arraste e reorganize as colunas na ordem correta:",
     )
@@ -99,4 +100,3 @@ if uploaded_file:
                 data=file,
                 file_name=new_file_name
             )
-
