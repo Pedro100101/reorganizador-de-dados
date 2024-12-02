@@ -53,8 +53,7 @@ if uploaded_file:
     selected_columns = sort_items(
         items=DEFAULT_COLUMNS,
         key="sortable_columns",
-        direction="horizontal",
-        label="Arraste e reorganize as colunas na ordem correta:",
+        direction="horizontal",  # Direção horizontal para melhor visualização
     )
 
     st.write("Ordem selecionada:")
