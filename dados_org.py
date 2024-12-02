@@ -17,6 +17,16 @@ DEFAULT_COLUMNS = [
 
 st.title("Reorganizador de Colunas para Dados Geoquímicos")
 
+# Adicionar assinatura no rodapé
+st.markdown("---")  # Linha separadora
+st.markdown(
+    """
+    **Desenvolvido por [Pedro Armond](https://www.researchgate.net/profile/Pedro-Armond)**  
+    📧 E-mail: [pedro.armond@aluno.ufop.edu.br](mailto:pedro.armond@aluno.ufop.edu.br)  
+    🌐 ResearchGate: [https://www.researchgate.net/profile/Pedro-Armond](https://www.researchgate.net/profile/Pedro-Armond)
+    """
+)
+
 # Instruções de uso
 st.markdown(
     """
