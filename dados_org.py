@@ -3,22 +3,22 @@ import pandas as pd
 import os
 from openpyxl import load_workbook
 from openpyxl.styles import Font
+from streamlit_sortable import sortable_list  # Biblioteca para drag-and-drop
 
 # Definir as colunas padrão
 DEFAULT_COLUMNS = [
     "Sample", "Pluton", "Group", "Rock_type", "Observation", "Tectonic_setting", "Location_notes",
-    "Age", "Reference", "Colour", "Symbol", "Size", "SiO2", "TiO2", "Al2O3", "FeO", "FeOt",
-    "Fe2O3", "Fe2O3t", "MnO", "MgO", "CaO", "K2O", "Na2O", "P2O5", "Total", "H2Ot", "LOI",
-    "Li", "Be", "B", "Sc", "V", "Cr", "Ni", "Cu", "Zn", "Rb", "Sr", "Y", "Zr", "Nb", "Cs", 
-    "Ba", "La", "Ce", "Pr", "Nd", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", 
-    "Lu", "Hf", "Ta", "Pb", "Th", "U", "Co", "Mo", "W", "Ga", "Ge", "As", "In", "Sn", 
-    "Sb", "Cd"
+    "Age", "Reference", "Colour", "Symbol", "Size", "SiO2", "TiO2", "Al2O3", "FeO", "FeOt", "Fe2O3", "Fe2O3t", "MnO", "MgO", "CaO", "K2O", "Na2O", "P2O5", "Total", 
+    "H2Ot", "LOI", "Li", "Be", "B", "Sc", "V", "Cr", "Ni", "Cu", "Zn", "Rb", "Sr", "Y", 
+    "Zr", "Nb", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", 
+    "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "Pb", "Th", "U", "Co", "Mo", "W", "Ga", "Ge", 
+    "As", "In", "Sn", "Sb", "Cd"
 ]
 
 st.title("Reorganizador de Colunas para Dados Geoquímicos")
 
 # Adicionar assinatura no rodapé
-st.markdown("---")  # Linha separadora
+st.markdown("---")
 st.markdown(
     """
     **Desenvolvido por [Pedro Armond](https://www.researchgate.net/profile/Pedro-Armond)**  
@@ -48,17 +48,13 @@ if uploaded_file:
         st.warning("As seguintes colunas excedentes foram detectadas e serão adicionadas ao final:")
         st.write(extra_columns)
 
-    # Opção para selecionar a ordem das colunas
-    st.subheader("Selecione a ordem das colunas:")
-    selected_columns = st.multiselect(
-        "Escolha as colunas desejadas na ordem correta:",
-        DEFAULT_COLUMNS,
-        default=[]
+    # Reordenação com Drag-and-Drop
+    st.subheader("Reorganize as colunas desejadas:")
+    selected_columns = sortable_list(
+        items=DEFAULT_COLUMNS,
+        direction="horizontal",
+        label="Arraste e reorganize as colunas na ordem correta:",
     )
-
-    # Botão para selecionar todas as colunas automaticamente
-    if st.button("Marcar todas as colunas (recomendado)"):
-        selected_columns = DEFAULT_COLUMNS
 
     st.write("Ordem selecionada:")
     st.write(selected_columns)
@@ -103,3 +99,4 @@ if uploaded_file:
                 data=file,
                 file_name=new_file_name
             )
+
