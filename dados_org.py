@@ -7,7 +7,7 @@ from streamlit_sortables import sort_items  # Biblioteca para drag-and-drop
 
 # Definir as colunas padrão
 DEFAULT_COLUMNS = [
-    "Sample", "Pluton", "Group", "Sub_group", "Rock_type", "Observation", "Tectonic_setting", "UTM_X", "UTM_Y",
+    "Sample", "Pluton", "Group", "Sub_group", "Rock_type", "Observation", "Tectonic_setting", "UTM_Zone", "UTM_X", "UTM_Y",
     "Age", "Reference", "Colour", "Symbol", "Size", "SiO2", "TiO2", "Al2O3", "FeO", "FeOt", "Fe2O3", "Fe2O3t", "MnO", "MgO", "CaO", "K2O", "Na2O", "P2O5", "Total", 
     "H2Ot", "LOI", "Li", "Be", "B", "Sc", "V", "Cr", "Ni", "Cu", "Zn", "Rb", "Sr", "Y", 
     "Zr", "Nb", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", 
