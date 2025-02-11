@@ -36,7 +36,7 @@ st.markdown(
     3. **Visualize as colunas excedentes:** O algoritmo identificará colunas com labels que não correspondem ao padrão e as mostrará na tela. Essas colunas serão adicionadas ao final da planilha processada.
     4. **Organize as colunas existentes:** Utilize a funcionalidade de drag-and-drop para reorganizar as colunas definidas pelo padrão e os rótulos adicionais (se houver):
         ```
-        "Sample", "Pluton", "Group", "Sub_group", "Rock_type", "Observation", "Tectonic_setting", "UTM_X", "UTM_Y",
+        "Sample", "Pluton", "Group", "Sub_group", "Rock_type", "Observation", "Tectonic_setting", "UTM_Zone", "UTM_X", "UTM_Y",
         "Age", "Reference", "Colour", "Symbol", "Size", "SiO2", "TiO2", "Al2O3", "FeO", "FeOt", 
         "Fe2O3", "Fe2O3t", "MnO", "MgO", "CaO", "K2O", "Na2O", "P2O5", "Total", "H2Ot", "LOI",
         "Li", "Be", "B", "Sc", "V", "Cr", "Ni", "Cu", "Zn", "Rb", "Sr", "Y", "Zr", "Nb", "Cs", 
